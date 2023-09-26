@@ -17,7 +17,9 @@
 
 	function handleCopy() {
 		navigator.clipboard.writeText(address);
-		toast('Address copied to clipboard');
+		toast('Address copied to clipboard', {
+			position: 'bottom-end'
+		});
 	}
 </script>
 
