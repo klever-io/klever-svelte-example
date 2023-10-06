@@ -3,6 +3,23 @@
 	import { account } from '$lib/store';
 	import { ArrowDownToLine, LogOut, Send } from 'lucide-svelte';
 
+	let amount = 0;
+	let precision = 6;
+
+	account.subscribe(async (value) => {
+		if (!value || value.length !== 62) {
+			return;
+		}
+
+		const request = await fetch(window.kleverWeb.provider.api + '/v1.0/address/' + value);
+		const response = await request.json();
+		if (response.error) {
+			return;
+		}
+
+		amount = response.data.account.balance;
+	});
+
 	function handleLogout() {
 		account.set(null);
 	}
@@ -24,7 +41,15 @@
 			</form>
 		</div>
 
-		<div class="mt-2 mb-6 h-[1px] w-full bg-slate-300" />
+		<div class="mt-2 h-[1px] w-full bg-slate-300" />
+
+		<div class="mt-2 mb-6">
+			<span class="text-sm"
+				>Amount: <strong class="text-md font-medium"
+					>{(amount / 10 ** precision).toFixed(2)}KLV</strong
+				></span
+			>
+		</div>
 
 		<div class="grid grid-cols-2 gap-2">
 			<a href="/private">
