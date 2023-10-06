@@ -45,7 +45,7 @@
 
 		<div class="mt-2 mb-6">
 			<span class="text-sm"
-				>Amount: <strong class="text-md font-medium"
+				>Balance: <strong class="text-md font-medium"
 					>{(amount / 10 ** precision).toFixed(2)}KLV</strong
 				></span
 			>
