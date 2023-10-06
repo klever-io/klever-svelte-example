@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { signMessage } from '$lib';
 	import Button from '$lib/components/Button.svelte';
 	import { account } from '$lib/store';
 	import toast from 'svelte-french-toast';
@@ -22,12 +21,13 @@
 				throw Error('Cannot retrieve wallet address');
 			}
 
-			const message = await window.kleverWeb.signMessage(signMessage);
-			const result = await window.kleverWeb.validateSignature(signMessage, message, address);
+			// TODO: Change when mobile finish validate signature method
+			// const message = await window.kleverWeb.signMessage(signMessage);
+			// const result = await window.kleverWeb.validateSignature(signMessage, message, address);
 
-			if (!result) {
-				throw Error('Invalid signature');
-			}
+			// if (!result) {
+			// 	throw Error('Invalid signature');
+			// }
 
 			account.set(address);
 
